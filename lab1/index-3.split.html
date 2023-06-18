@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Перестановка слов</title>
+    <script>
+        function rearrangeWords() {
+            // Получаем введенную строку текста
+            var inputText = document.getElementById("inputText").value;
+
+            // Разбиваем строку на отдельные слова
+            var words = inputText.split(" ");
+
+            // Переменные для хранения слов, начинающихся с гласной и остальных слов
+            var vowelWords = "";
+            var consonantWords = "";
+
+            // Функция для проверки, начинается ли слово с гласной буквы
+            function startsWithVowel(word) {
+                var vowels = "aeiouAEIOUаеёиоюяуэюАЕЁИОЮЯУЭЮ";
+                return vowels.includes(word[0]);
+            }
+
+            // Перебираем все слова и добавляем их в соответствующую группу
+            for (var i = 0; i < words.length; i++) {
+                var currentWord = words[i];
+                if (startsWithVowel(currentWord)) {
+                    vowelWords += currentWord + " ";
+                } else {
+                    consonantWords += currentWord + " ";
+                }
+            }
+
+            // Объединяем слова в нужном порядке
+            var result = vowelWords + consonantWords;
+
+            // Выводим результат на страницу
+            document.getElementById("outputText").textContent = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Перестановка слов</h1>
+    <textarea id="inputText" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick="rearrangeWords()">Переставить слова</button>
+    <br>
+    <p id="outputText"></p>
+</body>
+</html>

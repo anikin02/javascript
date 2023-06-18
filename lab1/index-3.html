@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Перестановка слов</title>
+    <script>
+        function rearrangeWords() {
+            // Получаем введенную строку текста
+            var inputText = document.getElementById("inputText").value;
+
+            // Переменные для хранения слов, начинающихся с гласной и остальных слов
+            var vowelWords = "";
+            var consonantWords = "";
+
+            // Функция для проверки, является ли символ гласной буквой
+            function isVowel(character) {
+                var vowels = "aeiouAEIOUаеёиоюяуэюАЕЁИОЮЯУЭЮ";
+                return vowels.includes(character);
+            }
+
+            // Функция для определения, начинается ли слово с гласной буквы
+            function startsWithVowel(word) {
+                return isVowel(word.charAt(0));
+            }
+
+            // Переменные для хранения текущего слова и текущего символа
+            var currentWord = "";
+            var currentChar = "";
+
+            // Перебираем все символы в строке
+            for (var i = 0; i < inputText.length; i++) {
+                currentChar = inputText.charAt(i);
+
+                // Если текущий символ не является разделителем (пробелом)
+                if (currentChar !== " ") {
+                    currentWord += currentChar;
+                } else {
+                    // Если текущий символ является разделителем, проверяем текущее слово
+                    if (currentWord !== "") {
+                        if (startsWithVowel(currentWord)) {
+                            vowelWords += currentWord + " ";
+                        } else {
+                            consonantWords += currentWord + " ";
+                        }
+                        currentWord = "";
+                    }
+                }
+            }
+
+            // Проверяем последнее слово, если оно есть
+            if (currentWord !== "") {
+                if (startsWithVowel(currentWord)) {
+                    vowelWords += currentWord + " ";
+                } else {
+                    consonantWords += currentWord + " ";
+                }
+            }
+
+            // Объединяем слова в нужном порядке
+            var result = vowelWords + consonantWords;
+
+            // Выводим результат на страницу
+            document.getElementById("outputText").textContent = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Перестановка слов</h1>
+    <textarea id="inputText" rows="4" cols="50"></textarea>
+    <br>
+    <button onclick="rearrangeWords()">Переставить слова</button>
+    <br>
+    <p id="outputText"></p>
+</body>
+</html>
+

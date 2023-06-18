@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Горизонтальные линии и таблица</title>
+    <style>
+        .horizontal-line {
+            border-top: 1px solid black;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+    <script>
+        function generatePage() {
+            // Получаем введенное пользователем значение n
+            var n = parseInt(document.getElementById("inputN").value);
+
+            // Проверяем, что значение n соответствует требуемому диапазону
+            if (n <= 2 || n >= 15) {
+                alert("Значение n должно быть больше 2 и меньше 15.");
+                return;
+            }
+
+            for (var i = 1; i <= n; i++) {
+                var lineWidth = 100 / n * i; // Ширина линии в процентах
+                var line = document.createElement("hr");
+                line.className = "horizontal-line";
+                line.style.width = lineWidth + "%";
+                document.body.appendChild(line);
+            }
+
+            // Генерируем таблицу
+            var table = document.createElement("table");
+            for (var row = 1; row <= n; row++) {
+                var tr = document.createElement("tr");
+                for (var col = 1; col <= n; col++) {
+                    var td = document.createElement("td");
+                    td.textContent = row + ", " + col;
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+            
+            document.body.appendChild(table);
+
+            // Генерируем нижние горизонтальные линии
+            for (var i = n; i >= 1; i--) {
+                var lineWidth = 100 / n * i; // Ширина линии в процентах
+                var line = document.createElement("hr");
+                line.className = "horizontal-line";
+                line.style.width = lineWidth + "%";
+                document.body.appendChild(line);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Горизонтальные линии и таблица</h1>
+    <label for="inputN">Введите значение n:</label>
+    <input type="number" id="inputN" min="3" max="14">
+    <button onclick="generatePage()">Сформировать страницу</button>
+</body>
+</html>
